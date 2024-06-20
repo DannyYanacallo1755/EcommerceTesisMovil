@@ -1,0 +1,96 @@
+ion-content {
+  --background: #cb744e98;
+  position: relative;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0.5rem;
+
+    ion-button {
+      height: 60px;
+      width: 60px;
+
+      ion-icon {
+        font-size: 2rem;
+      }
+    }
+  }
+
+  .card {
+    min-height: 100%;
+    width: 100%;
+    top: 2rem;
+    background: #fff;
+    position: relative;
+    bottom: 0;
+    border-radius: 3rem 3rem 0 0;
+    padding: 2rem;
+
+    .image {
+      position: absolute;
+      top: -4rem;  /* Ajustar según sea necesario para dar más espacio */
+      width: 50%;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 1.5rem;  /* Redondear bordes de la imagen */
+      overflow: hidden;  /* Asegurarse de que los bordes redondeados sean visibles */
+
+      ion-img {
+        border-radius: 1.5rem;  /* Redondear bordes de la imagen */
+      }
+    }
+
+    .card-title {
+      margin-top: 14rem; /* Ajustar según sea necesario para dar más espacio */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.2rem;
+
+      h1 {
+        font-weight: 700;
+        font-size: 1.9rem;
+      }
+
+      p {
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: #ffb800;
+
+        sup {
+          font-size: 1.2rem;
+          margin-right: -0.5rem;
+        }
+      }
+    }
+
+    .rates {
+      display: flex;
+      align-items: center;
+      margin-bottom: 3rem;
+    }
+
+    .about-container {
+      background-color: #cb744e98;
+      padding: 1rem;
+      border-radius: 1rem;
+      margin-bottom: 2.5rem;
+
+      .about {
+        margin: 0;
+
+        h1 {
+          font-weight: 600;
+          margin-bottom: 0.5rem;
+        }
+
+        p {
+          font-size: 1.1rem;
+          line-height: 1.6;
+          color: #000000;
+        }
+      }
+    }
+  }
+}

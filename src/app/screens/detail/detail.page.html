@@ -1,0 +1,46 @@
+<ion-content>
+  <div class="header">
+    <ion-buttons>
+      <ion-button routerLink="/home/listing">
+        <ion-icon slot="icon-only" color="light" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons>
+      <ion-button (click)="toggleWishlist()">
+        <ion-icon slot="icon-only" [color]="isInWishlist ? 'danger' : 'light'" name="heart"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </div>
+
+  <!-- FOOD DETAIL CARD -->
+  <div *ngIf="food; else loading" class="card">
+    <div class="image">
+      <ion-img [src]="food.image"></ion-img>
+    </div>
+
+    <div class="card-content">
+      <div class="card-title">
+        <h1 class="ion-no-margin">{{food.name}}</h1>
+        <p class="ion-no-margin"><sup>$</sup> {{food.new_price | number: '1.2'}}</p>
+      </div>
+    </div>
+
+    <div class="rates">
+  
+    </div>
+
+    <!-- Descripción del producto con fondo coloreado -->
+    <div class="about-container">
+      <div class="about">
+        <h1>Acerca de</h1>
+        <p [innerHTML]="food.description"></p>
+      </div>
+    </div>
+
+    <app-button (click)="addItemToCart()">Añadir al carrito</app-button>
+  </div>
+
+  <ng-template #loading>
+    <ion-spinner></ion-spinner>
+  </ng-template>
+</ion-content>

@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Lista de Deseos 💝</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="wishlist-content">
+  <ion-list>
+    <ion-card *ngFor="let item of wishlist" (click)="viewDetail(item)">
+      <ion-card-header>
+        <ion-card-title>{{item.name}}</ion-card-title>
+        <ion-card-subtitle><sup>$</sup>{{item.new_price | number: '1.2'}}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-thumbnail slot="start">
+          <ion-img [src]="item.image"></ion-img>
+        </ion-thumbnail>
+        <ion-button fill="clear" color="danger" (click)="removeFromWishlist(item); $event.stopPropagation();">
+          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+</ion-content>

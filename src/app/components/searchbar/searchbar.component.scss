@@ -1,0 +1,19 @@
+.searchbar-container {
+  padding: 0 1rem;  // Padding lateral para que no toque los bordes de la pantalla
+}
+
+ion-searchbar {
+  --box-shadow: none;
+  --background: #f3f3f3;
+  --border-radius: 1.2rem;
+  --placeholder-font-weight: 600;
+  --placeholder-opacity: 0.2;
+  --height: 2.5rem;  // Ajustar la altura del searchbar
+  --padding-start: 10px;  // Ajustar el padding interno
+  --padding-end: 10px;    // Ajustar el padding interno
+  --icon-padding: 0;  // Asegura que no haya padding adicional en los iconos
+  --input-padding-start: 10px;  // Padding interno del input
+  --input-padding-end: 10px;    // Padding interno del input
+  padding: 0;
+  margin-bottom: 1rem;  // Ajustar el margen inferior
+}

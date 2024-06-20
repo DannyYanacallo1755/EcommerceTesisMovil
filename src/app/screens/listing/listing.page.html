@@ -1,0 +1,22 @@
+<ion-content>
+  <!-- HEADER -->
+  <div class="header">
+    <h1>Productos</h1>
+  </div>
+
+  <!-- SEARCHBAR -->
+  <div class="searchbar-container">
+    <app-searchbar></app-searchbar>
+  </div>
+
+  <!-- CATEGORY -->
+  <div class="categories">
+    <app-category-item *ngFor="let item of categories" [item]="item"></app-category-item>
+  </div>
+
+  <!-- PRODUCTS -->
+  <h1 class="list-header">Todos</h1>
+  <div class="food-list">
+    <app-food-card *ngFor="let food of foods" [item]="food" (clicked)="goToDetailPage(food._id)"></app-food-card>
+  </div>
+</ion-content>
