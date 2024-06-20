@@ -26,6 +26,7 @@ ion-content {
     bottom: 0;
     border-radius: 3rem 3rem 0 0;
     padding: 2rem;
+    padding-bottom: 0; /* Remove bottom padding to allow the about-container to touch the screen bottom */
 
     .image {
       position: absolute;
@@ -72,10 +73,11 @@ ion-content {
     }
 
     .about-container {
-      background-color: #cb744e98;
-      padding: 1rem;
-      border-radius: 1rem;
-      margin-bottom: 2.5rem;
+      background-color: rgba(203, 116, 78, 0.5960784314);
+      margin: 0 -2rem; /* Ajustar los márgenes para que el contenedor toque los bordes de la pantalla */
+      padding: 1rem 2rem; /* Ajustar el padding para mantener el contenido dentro del contenedor */
+      border-radius: 3rem; /* Eliminar el border-radius para que el contenedor toque los bordes */
+      margin-bottom: 0;
 
       .about {
         margin: 0;
