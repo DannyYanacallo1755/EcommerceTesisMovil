@@ -68,7 +68,7 @@ export class DetailPage implements OnInit, OnDestroy {
       };
 
       this.cartService.addToCart(cartItem);
-      this.presentToast('Producto añadido al carrito');
+      
     }
   }
 

@@ -7,4 +7,18 @@ ion-button {
   font-size: 1.2rem;
   font-weight: 600;
   height: 70px;
+  width: 100%; /* Asegura que el botón ocupe el ancho completo del contenedor */
+  max-width: 400px; /* Limitar el ancho máximo del botón */
+  margin: 0; /* Resetea el margen para ser controlado por el contenedor */
+  padding: 0 1rem; /* Ajusta el padding horizontal si es necesario */
+
+  &:hover {
+    --background: #cb744e98;
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    --background: #f0101098;
+    transform: translateY(0);
+  }
 }

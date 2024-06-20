@@ -3,6 +3,7 @@ import { AlertController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { CartItem } from 'src/app/models/cart-item.model';
 import { CartService } from 'src/app/services/cart.service';
+import { PdfGeneratorService } from 'src/app/services/pdf-generator.service';
 
 @Component({
   selector: 'app-cart',
@@ -15,7 +16,8 @@ export class CartPage implements OnInit {
 
   constructor(
     private cartService: CartService,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private pdfGeneratorService: PdfGeneratorService
   ) {}
 
   ngOnInit() {
@@ -48,5 +50,15 @@ export class CartPage implements OnInit {
     });
 
     alert.present();
+  }
+
+  async generatePdf() {
+    this.cartItems$.subscribe(cartItems => {
+      this.totalAmount$.subscribe(totalAmount => {
+        if (cartItems && totalAmount !== undefined) {
+          this.pdfGeneratorService.generateCartPdf(cartItems, totalAmount);
+        }
+      });
+    });
   }
 }

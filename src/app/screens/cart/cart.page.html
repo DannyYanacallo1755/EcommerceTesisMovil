@@ -17,12 +17,17 @@
 
   <!-- EMPTY CART -->
   <div class="empty-cart" *ngIf="!(cartItems$ | async)?.length">
-    <ion-icon name="d-cart"></ion-icon>
-    <p>Tu carrito esta vacío</p>
+    <ion-icon name="cart-outline"></ion-icon>
+    <p>Tu carrito está vacío</p>
   </div>
 
-  <!-- CHECKOUT BUTTON -->
-  <app-button *ngIf="(cartItems$ | async)?.length">
+  <!-- TOTAL AMOUNT -->
+  <div class="total-amount" *ngIf="(cartItems$ | async)?.length">
     Total: <span><sup>$</sup>{{ totalAmount$ | async | number: '1.2' }}</span>
-  </app-button>
+  </div>
+
+  <!-- BUY BUTTON -->
+  <div class="button-container" *ngIf="(cartItems$ | async)?.length">
+    <app-button (click)="generatePdf()">Comprar</app-button>
+  </div>
 </ion-content>
