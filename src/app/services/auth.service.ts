@@ -7,7 +7,7 @@ import { catchError, map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-  private baseUrl = 'https://backendtesisecommerce.onrender.com/api/users'; // Actualiza la baseUrl
+  private baseUrl = 'https://backendtesisecommerce.onrender.com/api/users';
 
   constructor(private http: HttpClient) { }
 
@@ -48,6 +48,10 @@ export class AuthService {
       // Backend returned an unsuccessful response code
       if (error.status === 400 && error.error.msg) {
         errorMessage = error.error.msg;
+      } else if (error.status === 404) {
+        errorMessage = 'Usuario no encontrado';
+      } else if (error.status === 401) {
+        errorMessage = 'Contraseña incorrecta';
       } else {
         errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
       }

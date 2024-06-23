@@ -45,4 +45,13 @@ ion-content {
       --box-shadow: none;
     }
   }
+  .error-message {
+    margin-top: 1rem;
+    color: #f53d3d;
+    text-align: center;
+    font-size: 1.2rem;
+    background: #fddddd;
+    padding: 1rem;
+    border-radius: 8px;
+  }
 }

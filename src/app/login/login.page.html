@@ -23,4 +23,8 @@
     </ion-item>
     <ion-button expand="block" shape="round" (click)="login()">Iniciar</ion-button>
   </form>
+
+  <div *ngIf="error" class="error-message">
+    {{ error }}
+  </div>
 </ion-content>

@@ -15,12 +15,8 @@ export class LoginPage {
   constructor(private authService: AuthService, private router: Router) {}
 
   login() {
-    console.log('Email:', this.email);
-    console.log('Password:', this.password);
-
     this.authService.login(this.email, this.password).subscribe(
       (response) => {
-        console.log(response);
         if (response && response.token) {
           // Credenciales válidas, redirigir al home
           this.router.navigate(['/home']);
@@ -30,8 +26,7 @@ export class LoginPage {
         }
       },
       (error) => {
-        console.error(error);
-        this.error = 'Error en el servidor';
+        this.error = error;
       }
     );
   }
