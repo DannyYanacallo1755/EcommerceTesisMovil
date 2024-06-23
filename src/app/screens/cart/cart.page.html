@@ -1,9 +1,9 @@
 <ion-content>
-  <h3 class="title" *ngIf="(cartItems$ | async)?.length">{{ (cartItems$ | async)?.length }} artículos en el carrito </h3>
+  <h3 class="title" *ngIf="cartItems.length">{{ cartItems.length }} artículos en el carrito </h3>
 
   <!-- CART ITEMS -->
   <ion-list lines="none">
-    <ion-item-sliding *ngFor="let item of cartItems$ | async">
+    <ion-item-sliding *ngFor="let item of cartItems">
       <ion-item>
         <app-cart-item [item]="item" (increase)="onIncrease(item)" (decrease)="onDecrease(item)"></app-cart-item>
       </ion-item>
@@ -16,18 +16,25 @@
   </ion-list>
 
   <!-- EMPTY CART -->
-  <div class="empty-cart" *ngIf="!(cartItems$ | async)?.length">
+  <div class="empty-cart" *ngIf="!cartItems.length">
     <ion-icon name="cart-outline"></ion-icon>
     <p>Tu carrito está vacío</p>
   </div>
 
   <!-- TOTAL AMOUNT -->
-  <div class="total-amount" *ngIf="(cartItems$ | async)?.length">
-    Total: <span><sup>$</sup>{{ totalAmount$ | async | number: '1.2' }}</span>
+  <div class="total-amount" *ngIf="cartItems.length">
+    Total: <span><sup>$</sup>{{ totalAmount | number: '1.2' }}</span>
   </div>
 
   <!-- BUY BUTTON -->
-  <div class="button-container" *ngIf="(cartItems$ | async)?.length">
+  <div class="button-container" *ngIf="cartItems.length">
     <app-button (click)="generatePdf()">Comprar</app-button>
+  </div>
+
+  <!-- DOWNLOAD LINK -->
+  <div *ngIf="downloadLink" class="download-section">
+    <p>Descarga tu PDF desde este enlace:</p>
+    <button ion-button (click)="openLink()">Abrir Enlace</button>
+    <button ion-button (click)="copyLink()">Copiar Enlace</button>
   </div>
 </ion-content>

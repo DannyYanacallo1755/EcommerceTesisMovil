@@ -1,75 +1,93 @@
 import { Injectable } from '@angular/core';
-import { jsPDF } from 'jspdf';
-import { CartItem } from 'src/app/models/cart-item.model';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { CartItem } from '../models/cart-item.model';
+import { ToastController } from '@ionic/angular';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { finalize } from 'rxjs/operators';
+
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PdfGeneratorService {
+  downloadLink: string | null = null;
 
-  constructor() { }
+  constructor(private toastCtrl: ToastController, private storage: AngularFireStorage) {}
 
   async generateCartPdf(cartItems: CartItem[], totalAmount: number) {
-    const doc = new jsPDF();
-    const img = new Image();
-    img.src = 'assets/images/icons/Logocafe.png';  // Ruta de tu logotipo
+    const documentDefinition = this.getDocumentDefinition(cartItems, totalAmount);
 
-    img.onload = () => {
-      // Adding store logo
-      doc.addImage(img, 'PNG', 10, 10, 50, 20);
+    try {
+      pdfMake.createPdf(documentDefinition).getBlob(async (blob: Blob) => {
+        const filePath = `cart_pdfs/Cart_${new Date().getTime()}.pdf`;
+        const fileRef = this.storage.ref(filePath);
+        const task = this.storage.upload(filePath, blob);
 
-      // Adding store information
-      doc.setFontSize(20);
-      doc.text("Factura de Compra", 70, 25);
-
-      doc.setFontSize(12);
-      doc.text("Artesanias Jimenez", 10, 40);
-      doc.text("Dirección: Antonio de Ulloa N23-49 y Mercadillo", 10, 45);
-      doc.text("Teléfono: +593 98 832 5130", 10, 50);
-      doc.text("Correo: info@artesaniasjimenez.com", 10, 55); // Añade el correo
-
-      // Adding order number
-      let orderNumber = localStorage.getItem('orderNumber');
-      if (!orderNumber) {
-        orderNumber = '1';
-      } else {
-        orderNumber = (parseInt(orderNumber) + 1).toString();
-      }
-      localStorage.setItem('orderNumber', orderNumber);
-
-      doc.setFontSize(14);
-      doc.text(`Orden de Compra No: ${orderNumber}`, 10, 65);
-
-      let y = 80;
-      doc.setFontSize(14);
-      doc.text("Detalles de la factura", 10, y);
-
-      y += 10;
-      doc.setFontSize(12);
-      doc.text("Productos", 10, y);
-      
-      doc.text("Precio", 90, y);
-      doc.text("Cantidad", 110, y);
-      doc.text("Total", 150, y);
-      y += 10;
-
-      cartItems.forEach((item) => {
-        doc.text(item.name, 10, y);
-        doc.text(`$${item.price.toFixed(2)}`, 90, y);
-        doc.text(`${item.quantity}`, 110, y);
-        doc.text(`$${(item.price * item.quantity).toFixed(2)}`, 150, y);
-        y += 10;
+        task.snapshotChanges().pipe(
+          finalize(async () => {
+            const downloadURL = await fileRef.getDownloadURL().toPromise();
+            console.log('File available at', downloadURL);
+            this.presentToast('El PDF se generó correctamente. Por favor revisa la parte de abajo');
+            this.downloadLink = downloadURL; // Asigna el enlace a la propiedad downloadLink
+          })
+        ).subscribe();
       });
+    } catch (error) {
+      console.error('Error generating PDF: ', error);
+      this.presentToast('Error al generar el PDF.');
+    }
+  }
 
-      y += 10;
-      doc.setFontSize(14);
-      doc.text(`Total: $${totalAmount.toFixed(2)}`, 10, y);
-
-      // Adding footer
-      doc.setFontSize(10);
-      doc.text("Gracias por su compra!", 10, y + 20);
-
-      doc.save(`factura_${orderNumber}.pdf`);
+  private getDocumentDefinition(cartItems: CartItem[], totalAmount: number) {
+    return {
+      content: [
+        { text: 'Carrito de Compras', style: 'header' },
+        this.getItemsTable(cartItems),
+        { text: 'Total: $' + totalAmount.toFixed(2), style: 'total' }
+      ],
+      styles: {
+        header: {
+          fontSize: 18,
+          bold: true,
+          margin: [0, 0, 0, 10]
+        },
+        tableHeader: {
+          bold: true,
+        },
+        total: {
+          margin: [0, 20, 0, 0],
+          fontSize: 16,
+          bold: true
+        }
+      }
     };
+  }
+
+  private getItemsTable(cartItems: CartItem[]) {
+    return {
+      table: {
+        widths: ['*', 'auto', 'auto', 'auto'],
+        body: [
+          [
+            { text: 'Producto', style: 'tableHeader' },
+            { text: 'Cantidad', style: 'tableHeader' },
+            { text: 'Precio', style: 'tableHeader' },
+            { text: 'Subtotal', style: 'tableHeader' }
+          ],
+          ...cartItems.map(item => [item.name, item.quantity, item.price, (item.quantity * item.price).toFixed(2)])
+        ]
+      }
+    };
+  }
+
+  private async presentToast(message: string) {
+    const toast = await this.toastCtrl.create({
+      message,
+      duration: 5000, // Incrementa la duración para que el usuario tenga tiempo de copiar el enlace
+      position: 'top',
+    });
+    toast.present();
   }
 }

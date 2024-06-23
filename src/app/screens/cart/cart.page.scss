@@ -1,6 +1,8 @@
 ion-content {
   --padding-top: 1.6rem;
   --padding-end: 1.6rem;
+  --padding-bottom: 1.6rem;
+  --padding-start: 1.6rem;
 
   .title {
     font-weight: 700;
@@ -81,5 +83,49 @@ ion-content {
   app-button {
     width: 100%; /* Asegura que el botón ocupe el ancho completo del contenedor */
     max-width: 400px; /* Limitar el ancho máximo del botón */
+  }
+
+  /* Estilos para la sección del enlace de descarga */
+  .download-section {
+    margin-top: 2rem;
+    padding: 1rem;
+    background: #e3977798;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Sombras mejoradas */
+    text-align: center;
+    margin-left: 1rem;  /* Añadir margen izquierdo */
+    margin-right: 1rem; /* Añadir margen derecho */
+
+    p {
+      font-size: 1.4rem;
+      color: #333;
+      margin-bottom: 1rem;
+    }
+
+    ion-input {
+      --padding-start: 0.8rem;
+      --padding-end: 0.8rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 0.5rem;
+      background: #fff;
+    }
+
+    button {
+      margin: 0.5rem;
+      padding: 0.7rem 1.5rem;
+      font-size: 1.4rem;
+      border: none;
+      border-radius: 5px;
+      background-color: #eb8a60;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #e06831;
+      }
+    }
   }
 }
