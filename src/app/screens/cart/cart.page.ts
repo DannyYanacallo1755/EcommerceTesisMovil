@@ -32,22 +32,17 @@ export class CartPage implements OnInit, OnDestroy {
       this.cartItems = items;
     });
 
-    this.totalAmountSubscription = this.cartService.getTotalAmount().subscribe(amount => {
+    this.totalAmountSubscription = this.cartService.getTotalAmount().subscribe((amount: number) => {
       this.totalAmount = amount;
     });
   }
 
   onIncrease(item: CartItem) {
-    this.cartService.changeQty(1, item.id);
-    this.loadCart();
+    this.cartService.changeQty(1, item.id).then(() => this.loadCart());
   }
 
   onDecrease(item: CartItem) {
-    if (item.quantity === 1) this.removeFromCart(item);
-    else {
-      this.cartService.changeQty(-1, item.id);
-      this.loadCart();
-    }
+    this.cartService.changeQty(-1, item.id).then(() => this.loadCart());
   }
 
   async removeFromCart(item: CartItem) {
@@ -77,7 +72,7 @@ export class CartPage implements OnInit, OnDestroy {
 
     // Asegúrate de esperar a que el enlace de descarga esté disponible
     setTimeout(() => {
-      this.downloadLink = this.pdfGeneratorService.downloadLink; // Asigna el enlace de descarga
+      this.downloadLink = this.pdfGeneratorService.downloadLink; // Asigna el enlace
     }, 3000); // Ajusta el tiempo según sea necesario
   }
 

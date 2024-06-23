@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { CartItem } from '../models/cart-item.model';
-import { map } from 'rxjs/operators';
+import { ProductService } from './product.service';
 import { ToastController } from '@ionic/angular';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,10 @@ import { ToastController } from '@ionic/angular';
 export class CartService {
   private items$ = new BehaviorSubject<CartItem[]>([]);
 
-  constructor(private toastCtrl: ToastController) {}
+  constructor(
+    private productService: ProductService,
+    private toastCtrl: ToastController
+  ) {}
 
   getCart() {
     return this.items$.asObservable();
@@ -32,20 +36,41 @@ export class CartService {
     this.items$.next(this.items$.getValue().filter(item => item.id !== id));
   }
 
-  changeQty(quantity: number, id: string) {
+  async changeQty(quantity: number, id: string) {
     const items = this.items$.getValue();
     const index = items.findIndex(item => item.id === id);
+
     if (index !== -1) {
-      items[index].quantity += quantity;
-      this.items$.next(items);
+      try {
+        const product = await this.productService.getProductById(id).toPromise();
+
+        if (!product) {
+          await this.presentToast('Producto no encontrado');
+          return;
+        }
+
+        const newQuantity = items[index].quantity + quantity;
+
+        if (newQuantity > product.stock) {
+          await this.presentToast('De momento no contamos con más stock de este producto');
+        } else if (newQuantity <= 0) {
+          this.removeItem(id);
+        } else {
+          items[index].quantity = newQuantity;
+          this.items$.next(items);
+        }
+      } catch (error) {
+        await this.presentToast('Error al obtener información del producto');
+        console.error(error);
+      }
     }
   }
 
   getTotalAmount() {
     return this.items$.pipe(
-      map(items => {
+      map((items: CartItem[]) => {
         let total = 0;
-        items.forEach(item => {
+        items.forEach((item: CartItem) => {
           total += item.quantity * item.price;
         });
         return total;
