@@ -9,7 +9,7 @@ export interface Product {
     stock: number;
     description: string;
     date: Date;
-    title: string; // Cambia esto a obligatorio
-    price: number; // Cambia esto a obligatorio
+    title: string;
+    price: number; 
   }
   
