@@ -1,11 +1,11 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Lista de Deseos 💝</ion-title>
+    <ion-title>Lista de Deseos</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="wishlist-content">
-  <ion-list>
+  <ion-list *ngIf="wishlist.length">
     <ion-card *ngFor="let item of wishlist" (click)="viewDetail(item)">
       <ion-card-header>
         <ion-card-title>{{item.name}}</ion-card-title>
@@ -21,4 +21,10 @@
       </ion-card-content>
     </ion-card>
   </ion-list>
+
+  <!-- EMPTY WISHLIST -->
+  <div class="empty-wishlist" *ngIf="!wishlist.length">
+    <ion-icon name="heart-outline"></ion-icon>
+    <p>Tu lista de deseos está vacía</p>
+  </div>
 </ion-content>
