@@ -1,6 +1,6 @@
 <ion-content>
   <!-- HEADER -->
-  <div class="header">
+  <div class="header" *ngIf="!isSearching">
     <h1>Productos</h1>
   </div>
 
@@ -9,13 +9,18 @@
     <app-searchbar (searchChanged)="onSearchChanged($event)"></app-searchbar>
   </div>
 
+  <!-- MENSAJE DE RESULTADO DE BÚSQUEDA -->
+  <div *ngIf="isSearching" class="search-results-message">
+    <h2>    Resultado de su búsqueda:</h2>
+  </div>
+
   <!-- CATEGORY -->
-  <div class="categories">
+  <div class="categories" *ngIf="!isSearching">
     <app-category-item *ngFor="let item of categories" [item]="item" (click)="selectCategory(item)"></app-category-item>
   </div>
 
   <!-- PRODUCTS -->
-  <h1 class="list-header">{{ selectedCategory }}</h1>
+  <h1 class="list-header" *ngIf="!isSearching">{{ selectedCategory }}</h1>
   <div class="food-list">
     <app-food-card *ngFor="let food of filteredFoods" [item]="food" (clicked)="goToDetailPage(food._id)"></app-food-card>
   </div>

@@ -14,6 +14,7 @@ export class ListingPage implements OnInit {
   foods: Food[] = [];
   filteredFoods: Food[] = [];
   selectedCategory: string = 'Todo';
+  isSearching: boolean = false;
 
   constructor(private foodService: FoodService, private router: Router) {}
 
@@ -70,9 +71,15 @@ export class ListingPage implements OnInit {
   }
 
   onSearchChanged(searchTerm: string) {
-    this.filteredFoods = this.foods.filter(food => 
-      food.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    if (searchTerm) {
+      this.isSearching = true;
+      this.filteredFoods = this.foods.filter(food => 
+        food.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    } else {
+      this.isSearching = false;
+      this.applyFilter();
+    }
   }
 
   goToDetailPage(id: string) {

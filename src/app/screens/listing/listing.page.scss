@@ -1,6 +1,6 @@
 ion-content {
-  --padding-start: 0;  // Eliminar padding general
-  --padding-end: 0;  // Eliminar padding general
+  --padding-start: 0;
+  --padding-end: 0;
 
   .header {
     display: flex;
@@ -8,7 +8,7 @@ ion-content {
     align-items: center;
     margin-bottom: 1rem;
     margin-top: 3rem;
-    padding: 0 3.1rem;  // Añadir padding específico
+    padding: 0 3.1rem;
 
     h1 {
       font-size: 3rem;
@@ -35,29 +35,37 @@ ion-content {
   }
 
   .searchbar-container {
-    padding: 0 1rem;  // Añadir padding específico
-    margin-bottom: 1rem;  // Añadir margen inferior para separar del resto
+    padding: 0 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .search-results-message {
+    text-align: center;
+    margin: 1rem 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #515151;
   }
 
   .categories {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 1rem;
-    padding: 0 1rem;  // Añadir padding específico
+    padding: 0 1rem;
   }
 
   .list-header {
     font-weight: 700;
     color: #515151;
     font-size: 1.8rem;
-    margin: 0 1rem 1.6rem 1rem;  // Añadir margen superior e inferior y lateral para separar del borde
+    margin: 0 1rem 1.6rem 1rem;
     margin-top: 2.5rem;
   }
 
   .food-list {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap: 0.5rem;  // Ajustar el espacio entre las tarjetas
-    padding: 0 1rem;  // Ajustar el padding lateral
+    grid-gap: 0.5rem;
+    padding: 0 1rem;
   }
 }
