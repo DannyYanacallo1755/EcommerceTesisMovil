@@ -36,13 +36,13 @@ export class ListingPage implements OnInit {
       {
         id: 2,
         label: 'pajatoquilla',
-        image: 'assets/images/icons/nuevo.png',
+        image: 'assets/images/icons/paja.png',
         active: false,
       },
       {
         id: 3,
         label: 'totora',
-        image: 'assets/images/icons/popular.png',
+        image: 'assets/images/icons/totora.png',
         active: false,
       },
       {
@@ -67,6 +67,12 @@ export class ListingPage implements OnInit {
     this.categories.forEach(cat => cat.active = false);
     category.active = true;
     this.applyFilter();
+  }
+
+  onSearchChanged(searchTerm: string) {
+    this.filteredFoods = this.foods.filter(food => 
+      food.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
   }
 
   goToDetailPage(id: string) {

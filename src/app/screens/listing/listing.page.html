@@ -6,7 +6,7 @@
 
   <!-- SEARCHBAR -->
   <div class="searchbar-container">
-    <app-searchbar></app-searchbar>
+    <app-searchbar (searchChanged)="onSearchChanged($event)"></app-searchbar>
   </div>
 
   <!-- CATEGORY -->

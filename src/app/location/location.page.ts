@@ -21,7 +21,8 @@ export class LocationPage implements OnInit, AfterViewInit {
   }
 
   loadMap() {
-    const latLng = new google.maps.LatLng(-0.210530, -78.493579); 
+    // Coordenadas de la nueva ubicación
+    const latLng = new google.maps.LatLng(-0.199067, -78.4994376);
 
     const mapOptions = {
       center: latLng,
@@ -31,11 +32,11 @@ export class LocationPage implements OnInit, AfterViewInit {
 
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
 
-    // Añadir un marcador en la ubicación especificada
+    // Añadir un marcador en la nueva ubicación
     const marker = new google.maps.Marker({
       position: latLng,
       map: this.map,
-      title: 'Av. Ladrón de Guevara E11-253, Quito 170143'
+      title: 'Antonio de Ulloa 2354, Quito 170520'
     });
   }
 }
