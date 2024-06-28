@@ -11,12 +11,14 @@
 
   <!-- MENSAJE DE RESULTADO DE BÚSQUEDA -->
   <div *ngIf="isSearching" class="search-results-message">
-    <h2>    Resultado de su búsqueda:</h2>
+    <h2>Resultado de su búsqueda:</h2>
   </div>
 
   <!-- CATEGORY -->
   <div class="categories" *ngIf="!isSearching">
-    <app-category-item *ngFor="let item of categories" [item]="item" (click)="selectCategory(item)"></app-category-item>
+    <div class="category-container">
+      <app-category-item *ngFor="let item of categories" [item]="item" (click)="selectCategory(item)"></app-category-item>
+    </div>
   </div>
 
   <!-- PRODUCTS -->

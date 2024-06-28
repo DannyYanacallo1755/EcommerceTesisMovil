@@ -20,8 +20,8 @@
 
     <div class="card-content">
       <div class="card-title">
-        <h1 class="ion-no-margin">{{food.name}}</h1>
-        <p class="ion-no-margin"><sup>$</sup> {{food.new_price | number: '1.2'}}</p>
+        <h1 class="ion-no-margin">{{ food.name }}</h1>
+        <p class="ion-no-margin"><sup>$</sup>{{ food.new_price | number: '1.2' }}</p>
       </div>
     </div>
 
@@ -34,14 +34,15 @@
       <div class="about">
         <h1>Acerca de</h1>
         <p [innerHTML]="food.description"></p>
+        <br>
+        <app-button (click)="addItemToCart()">Añadir al carrito</app-button>
       </div>
     </div>
-<br>
 
-    <app-button (click)="addItemToCart()">Añadir al carrito</app-button>
   </div>
   <br>
   <ng-template #loading>
     <ion-spinner></ion-spinner>
   </ng-template>
 </ion-content>
+

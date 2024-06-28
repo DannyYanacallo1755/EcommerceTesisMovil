@@ -38,14 +38,42 @@ export class CartPage implements OnInit, OnDestroy {
   }
 
   onIncrease(item: CartItem) {
+    this.resetDownloadLink();
     this.cartService.changeQty(1, item.id).then(() => this.loadCart());
   }
 
-  onDecrease(item: CartItem) {
-    this.cartService.changeQty(-1, item.id).then(() => this.loadCart());
+  async onDecrease(item: CartItem) {
+    this.resetDownloadLink();
+    if (item.quantity > 1) {
+      this.cartService.changeQty(-1, item.id).then(() => this.loadCart());
+    } else {
+      const alert = await this.alertCtrl.create({
+        header: 'Eliminar',
+        message: '¿Seguro que quieres eliminar este producto?',
+        buttons: [
+          {
+            text: 'Si',
+            handler: () => {
+              this.cartService.removeItem(item.id);
+              this.loadCart();
+            },
+          },
+          {
+            text: 'No',
+            role: 'cancel',
+            handler: () => {
+              // Aquí podrías agregar alguna lógica adicional si es necesario
+            },
+          },
+        ],
+      });
+
+      alert.present();
+    }
   }
 
   async removeFromCart(item: CartItem) {
+    this.resetDownloadLink();
     const alert = await this.alertCtrl.create({
       header: 'Eliminar',
       message: '¿Estás seguro de que quieres eliminar el producto?',
@@ -64,6 +92,10 @@ export class CartPage implements OnInit, OnDestroy {
     });
 
     alert.present();
+  }
+
+  resetDownloadLink() {
+    this.downloadLink = null;
   }
 
   async generatePdf() {

@@ -46,12 +46,6 @@ export class ListingPage implements OnInit {
         image: 'assets/images/icons/totora.png',
         active: false,
       },
-      {
-        id: 4,
-        label: 'Despues',
-        image: 'assets/images/icons/oferta.png',
-        active: false,
-      },
     ];
   }
 

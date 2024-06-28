@@ -36,7 +36,7 @@ ion-content {
 
   .searchbar-container {
     padding: 0 1rem;
-    margin-bottom: 1rem;
+    margin: 2rem 0 1rem 0; /* Añadir margen superior y ajustar el margen inferior */
   }
 
   .search-results-message {
@@ -45,13 +45,25 @@ ion-content {
     font-size: 1.5rem;
     font-weight: 600;
     color: #515151;
+    margin-top: 2rem;
   }
 
   .categories {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 1rem;
+    display: flex;
+    justify-content: center;
     padding: 0 1rem;
+    margin-top: 2rem;
+
+    .category-container {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: nowrap;
+    }
+
+    app-category-item {
+      flex: 0 1 auto;
+    }
   }
 
   .list-header {
