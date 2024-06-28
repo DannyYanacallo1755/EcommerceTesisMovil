@@ -39,4 +39,36 @@ ion-content {
     color: #b6b6b6;
     margin-top: 40px;
   }
+
+  .error-message {
+    margin-top: 1rem;
+    color: #f53d3d;
+    text-align: center;
+    font-size: 1.2rem;
+    background: #fddddd;
+    padding: 1rem;
+    border-radius: 8px;
+  }
+
+  .loading-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-align: center;
+
+    ion-spinner {
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.2rem;
+      font-weight: 500;
+    }
+  }
 }

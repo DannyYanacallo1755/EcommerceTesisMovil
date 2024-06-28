@@ -12,17 +12,17 @@ export class SignupPage {
   email: string = '';
   password: string = '';
   error: string = '';
+  loading: boolean = false; // Añadimos esta variable
 
   constructor(private authService: AuthService, private router: Router) {}
 
   register() {
-    console.log('Nombre:', this.nombre);
-    console.log('Email:', this.email);
-    console.log('Password:', this.password);
+    this.loading = true; // Mostramos la pantalla de carga
+    this.error = ''; // Limpiamos cualquier mensaje de error previo
 
     this.authService.register(this.nombre, this.email, this.password).subscribe(
       (response) => {
-        console.log(response);
+        this.loading = false; // Ocultamos la pantalla de carga
         if (response && response.msg === 'Usuario registrado correctamente') {
           this.router.navigate(['/login']);
         } else {
@@ -30,7 +30,7 @@ export class SignupPage {
         }
       },
       (error) => {
-        console.error(error);
+        this.loading = false; // Ocultamos la pantalla de carga
         this.error = error;
       }
     );
