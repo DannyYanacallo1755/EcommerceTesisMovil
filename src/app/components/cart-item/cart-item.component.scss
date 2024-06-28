@@ -3,6 +3,7 @@
   padding: 1.5rem 1rem;
   border-radius: 1.5rem;
   display: flex;
+  align-items: center; /* Centrar los elementos verticalmente */
   justify-content: space-between;
   width: 95%;
   margin-left: 5%;
@@ -11,13 +12,14 @@
   .image {
     width: 90px;
     height: 90px;
-    border-radius: 50%;
+    border-radius: 0.6rem;
     margin-right: 1.2rem;
     position: absolute;
     left: -16%;
     top: 50%;
     transform: translateY(-50%);
     box-shadow: 10px 10px 10px 0px #c5c5c5;
+    overflow: hidden; /* Asegura que la imagen se redondee */
   }
 
   .description {
@@ -25,11 +27,13 @@
     margin-left: 3rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center; /* Centrar verticalmente */
+    word-break: break-word; /* Permitir el corte de palabras largas */
 
     h3 {
       font-weight: 600;
       color: #1f1f1f;
+      margin: 0; /* Eliminar margen para evitar desalineación */
     }
 
     p {
@@ -46,8 +50,12 @@
   }
 
   .actions {
+    display: flex;
+    flex-direction: column; /* Disposición vertical */
+    align-items: center; /* Centrar los botones horizontalmente */
     border: 1px solid #c7c7c7;
     border-radius: 2rem;
+    padding: 0.2rem;
 
     .counter {
       width: 35px;
@@ -58,6 +66,7 @@
       font-size: 1.3rem;
       font-weight: 700;
       color: #A75430;
+      margin: 0.5rem 0; /* Espacio entre los botones */
     }
 
     ion-button {
