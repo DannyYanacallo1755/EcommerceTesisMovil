@@ -7,12 +7,12 @@
 </ion-header>
 
 <ion-content>
-  <div id="header">
+  <div *ngIf="!loading" id="header">
     <h1>Iniciar Sesión</h1>
     <img src="assets/images/icons/Logocafe.png" />
   </div>
 
-  <form id="form">
+  <form *ngIf="!loading" id="form">
     <ion-item>
       <ion-label position="floating">Email</ion-label>
       <ion-input type="text" [(ngModel)]="email" name="email" required></ion-input>
@@ -24,7 +24,12 @@
     <ion-button expand="block" shape="round" (click)="login()">Iniciar</ion-button>
   </form>
 
-  <div *ngIf="error" class="error-message">
+  <div *ngIf="error && !loading" class="error-message">
     {{ error }}
+  </div>
+
+  <div *ngIf="loading" class="loading-content">
+    <ion-spinner name="crescent"></ion-spinner>
+    <p>Iniciando sesión...</p>
   </div>
 </ion-content>
