@@ -1,9 +1,3 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Lista de Deseos</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content class="wishlist-content">
   <ion-list *ngIf="wishlist.length">
     <ion-card *ngFor="let item of wishlist" (click)="viewDetail(item)">

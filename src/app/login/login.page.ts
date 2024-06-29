@@ -12,8 +12,13 @@ export class LoginPage {
   password: string = '';
   error: string = '';
   loading: boolean = false;
+  showPassword = false;
 
   constructor(private authService: AuthService, private router: Router) {}
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
 
   login() {
     this.loading = true;

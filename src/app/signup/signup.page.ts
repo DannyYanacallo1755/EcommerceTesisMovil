@@ -13,8 +13,12 @@ export class SignupPage {
   password: string = '';
   error: string = '';
   loading: boolean = false; // Añadimos esta variable
+  showPassword = false;
 
   constructor(private authService: AuthService, private router: Router) {}
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
 
   register() {
     this.loading = true; // Mostramos la pantalla de carga
