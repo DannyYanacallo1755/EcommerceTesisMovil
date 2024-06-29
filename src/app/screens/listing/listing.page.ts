@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { Category } from 'src/app/models/category.model';
 import { Food } from 'src/app/models/food.model';
 import { FoodService } from 'src/app/services/food.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-listing',
@@ -16,7 +18,12 @@ export class ListingPage implements OnInit {
   selectedCategory: string = 'Todo';
   isSearching: boolean = false;
 
-  constructor(private foodService: FoodService, private router: Router) {}
+  constructor(
+    private foodService: FoodService,
+    private router: Router,
+    private authService: AuthService,
+    private platform: Platform
+  ) {}
 
   ngOnInit() {
     this.getCategories();
@@ -24,6 +31,19 @@ export class ListingPage implements OnInit {
       this.foods = data;
       this.applyFilter();
     });
+
+    // Sobreescribir el comportamiento del botón de retroceso del dispositivo
+    this.platform.backButton.subscribeWithPriority(10, (processNextHandler) => {
+      // Evitar que el usuario vuelva al login
+      if (this.router.url === '/home') {
+        processNextHandler();
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    // Limpiar el event listener cuando se destruya el componente
+    this.platform.backButton.unsubscribe();
   }
 
   getCategories() {
@@ -78,5 +98,10 @@ export class ListingPage implements OnInit {
 
   goToDetailPage(id: string) {
     this.router.navigate(['detail', id]);
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }
