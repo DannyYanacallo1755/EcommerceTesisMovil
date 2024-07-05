@@ -1,8 +1,9 @@
 <ion-content>
   <!-- HEADER -->
   <div class="header" *ngIf="!isSearching">
+    <ion-button (click)="logout()" class="logout-button" fill="outline" shape="round" size="small" color="danger" name="cerrar" >Cerrar <br>
+      Sesión</ion-button>
     <h1>Productos</h1>
-    <ion-button (click)="logout()" color="danger" slot="end">Cerrar Sesión</ion-button>
   </div>
 
   <!-- SEARCHBAR -->

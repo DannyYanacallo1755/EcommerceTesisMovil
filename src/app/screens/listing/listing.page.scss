@@ -3,29 +3,30 @@ ion-content {
   --padding-end: 0;
 
   .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    position: relative;
     margin-bottom: 1rem;
-    margin-top: 3rem;
-    padding: 0 3.1rem;
+    margin-top: 1rem;
+    padding: 0 1rem;
+    text-align: center;
 
     h1 {
-      font-size: 2rem;
+      font-size: 3rem;
       font-weight: 600;
       color: #515151;
       margin: 0;
+      padding-top: 4rem; /* Aumentar el padding-top para bajar el título */
     }
 
-    ion-button {
-      font-size: 0.5rem;
-      padding: 0.5rem 1rem;
-      border-radius: 0.5rem;
-      margin-left: auto; /* Asegura que el botón esté separado del título */
+    .logout-button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      font-size: 0.9rem; /* Ajustar tamaño de fuente */
+      padding: 0.3rem 0.5rem; /* Ajustar padding */
+      border-radius: 0.3rem; /* Ajustar border-radius */
       color: #fff; /* Color del texto */
-
+      margin: 0.5rem; /* Ajustar margen */
     }
-
   }
 
   .searchbar-container {
