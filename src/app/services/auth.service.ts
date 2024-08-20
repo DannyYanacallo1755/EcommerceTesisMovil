@@ -23,7 +23,13 @@ export class AuthService {
         catchError(this.handleError)
       );
   }
-
+  resetPassword(email: string, newPassword: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}/reset-password`, { email, newPassword })
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+  
   register(nombre: string, email: string, password: string): Observable<any> {
     return this.http.post(`${this.baseUrl}/register`, { nombre, email, password })
       .pipe(

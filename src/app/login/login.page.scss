@@ -84,6 +84,17 @@ ion-content {
     }
   }
 
+  #forgot-password {
+    margin-top: 20px;
+    text-align: center;
+
+    a {
+      color: #ffffff;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+
   .error-message {
     margin-top: 1rem;
     color: #f53d3d;

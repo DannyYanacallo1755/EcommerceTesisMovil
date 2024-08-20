@@ -27,12 +27,10 @@ export class LoginPage {
     this.authService.login(this.email, this.password).subscribe(
       (response) => {
         if (response && response.token) {
-          // Credenciales válidas, redirigir al home
           this.router.navigate(['/home']).then(() => {
             this.loading = false;
           });
         } else {
-          // Credenciales inválidas, mostrar mensaje de error
           this.loading = false;
           this.error = 'Credenciales inválidas';
         }
@@ -42,5 +40,9 @@ export class LoginPage {
         this.error = 'Error en el inicio de sesión. Por favor, inténtelo de nuevo.';
       }
     );
+  }
+
+  navigateToResetPassword() {
+    this.router.navigate(['/reset-password']);
   }
 }

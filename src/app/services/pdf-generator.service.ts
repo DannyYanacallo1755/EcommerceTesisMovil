@@ -52,16 +52,16 @@ export class PdfGeneratorService {
           alignment: 'center',
           margin: [0, 0, 0, 20]
         },
-        { text: 'Factura de Compra', style: 'header', alignment: 'center' },
+        { text: 'Orden de Pedido', style: 'header', alignment: 'center' },
         { text: 'Artesanías Jiménez', style: 'subheader' },
         { text: 'Dirección: Antonio de Ulloa N23-49 y Mercadillo', style: 'subheader' },
         { text: 'Teléfono: +593 98 832 5130', style: 'subheader' },
         { text: 'Correo: info@artesaniasjimenez.com', style: 'subheader' },
-        { text: `Orden de Compra No: ${this.generateOrderNumber()}`, style: 'orderNumber' },
-        { text: 'Detalles de la factura', style: 'detailsHeader' },
+        { text: `Orden de Pedido No: ${this.generateOrderNumber()}`, style: 'orderNumber' },
+        { text: 'Detalles del Pedido', style: 'detailsHeader' },
         this.getItemsTable(cartItems),
         { text: 'Total: $' + totalAmount.toFixed(2), style: 'total' },
-        { text: 'Gracias por su compra!', style: 'footer', alignment: 'center' }
+        { text: 'Gracias por Visitarnos!', style: 'footer', alignment: 'center' }
       ],
       styles: {
         header: {

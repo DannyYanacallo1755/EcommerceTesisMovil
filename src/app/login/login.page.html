@@ -26,6 +26,10 @@
     <ion-button expand="block" shape="round" (click)="login()">Iniciar</ion-button>
   </form>
 
+  <div *ngIf="!loading" id="forgot-password">
+    <a (click)="navigateToResetPassword()">¿Olvidaste tu contraseña? Recupérala</a>
+  </div>
+
   <div *ngIf="error && !loading" class="error-message animate__animated animate__shakeX">
     {{ error }}
   </div>
