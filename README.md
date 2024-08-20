@@ -56,15 +56,15 @@ Puedes descargar la última versión del APK de la aplicación desde el siguient
 A continuación, se muestran algunas capturas de pantalla de la aplicación:
 
 ### Pantalla de Inicio de Sesión
-![Pantalla de Inicio de Sesión](ruta/a/la/imagen-de-inicio.png)
+![Pantalla de Inicio de Sesión](src/Imagenes/Login.png)
 
 ### Página Principal
-![Página Principal](ruta/a/la/imagen-de-principal.png)
+![Página Principal](src/Imagenes/Inicio.png)
 
 ### Detalle de Productos
-![Detalle de Productos](ruta/a/la/imagen-de-detalle-producto.png)
+![Detalle de Productos](src/Imagenes/Detalle.png)
 
-*(Reemplaza "ruta/a/la/imagen.png" con la ruta correcta a las imágenes que subas a tu repositorio.)*
+
 
 ## 🛠️ Tecnologías Utilizadas
 - **Ionic Framework**: Para el desarrollo de la interfaz de usuario y la lógica de la aplicación.
@@ -73,5 +73,3 @@ A continuación, se muestran algunas capturas de pantalla de la aplicación:
 - **pdfmaker**: Para la generación de facturas en formato PDF.
 - **Firebase**: Para la autenticación de usuarios y almacenamiento en tiempo real.
 
-## 📄 Licencia
-Este proyecto está bajo la Licencia MIT - consulta el archivo [LICENSE](LICENSE) para más detalles.
